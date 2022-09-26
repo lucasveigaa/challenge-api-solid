@@ -1,0 +1,207 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "User API",
+    "description": "This is an API Rent",
+    "version": "1.0.0",
+    "contact": {
+      "email": "lucasveigagonzaga@yahoo.com.br"
+    }
+  },
+    "paths": {
+      "/users": {
+
+
+
+        "post": {
+          "tags": ["Users"],
+          "summary": "Create a user",
+          "description": "Create a new user",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "name": "lucas",
+                    "description": "lucas@lucas.com"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Created",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Email já cadastrado no sistema!"              
+            }
+          }
+        },
+
+
+        "get": {
+          "tags": ["Users"],
+          "summary": "List all users",
+          "description": "List all users",
+          "parameters": [
+            {
+              "name": "user_id",
+              "in": "header",
+              "description": "user_id",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ]
+          ,
+          "responses": {
+            "200": {
+              "description": "Ok",
+              "content": {
+                "application/json": {
+                  "schema": {
+                   "$ref":"#/components/schemas/User"
+                    }
+                  }
+                 
+                }
+            },
+            "400": {
+              "description": "Usuário não encontrado!"
+            }
+          }
+        }
+        },
+
+
+
+
+        "/users/{userId}": {
+          "get": {
+            "tags": ["Users"],
+            "summary": "List user by id",
+            "description": "List user by id",
+            "parameters": [
+              {
+                "name": "userId",
+                "in": "path",
+                "description": "userId",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            ]
+            ,
+            "responses": {
+              "200": {
+                "description": "Ok",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                     "$ref":"#/components/schemas/User"
+                      }
+                    }
+                   
+                  }
+                                  
+                },
+                "404": {
+                  "description": "Usuário não existe!"
+                }
+              }
+            }
+          },
+          "/users/{userId}/admin": {
+            "patch": {
+            "tags": ["Users"],
+            "summary": "Turn user admin",
+            "description": "Turn user admin",
+            "parameters": [
+              {
+                "name": "userId",
+                "in": "path",
+                "description": "userId",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Ok",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                     "$ref":"#/components/schemas/User"
+                      }
+                    }
+                   
+                  }
+                                  
+                },
+                "404": {
+                  "description": "Esse usuário não existe!"
+                }
+              }
+        }
+       }
+
+
+        },
+
+        "components": {
+          "schemas": {
+            "User": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "admin": {
+                  "type": "boolean"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "created_at": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "type": "string"
+                }
+               }
+            }
+          }
+        }
+
+      
+
+    
+
+
+      
+    }
+
